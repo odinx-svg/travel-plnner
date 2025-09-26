@@ -268,7 +268,7 @@
   <main class="shell" role="main">
     <!-- Logo de OdinX -->
     <div class="logo-top">
-      <img class="logo-img" src="odinx-logo.png" alt="OdinX logo" />
+      <img class="logo-img" src="odinxlogo.png" alt="OdinX logo" />
       <h1 class="wordmark">Plan de viaje</h1>
     </div>
 
@@ -277,48 +277,48 @@
     <form id="travelForm" novalidate>
       <div class="grid cols-2">
         <div>
-          <label for="origin">Origen</label>
-          <input class="input" id="origin" name="origin" placeholder="Madrid, Barcelona…" required>
+          <label for="origen">Origen</label>
+          <input class="input" id="origen" name="origen" placeholder="Madrid, Barcelona…" required>
         </div>
         <div>
-          <label for="destination">Destino</label>
-          <input class="input" id="destination" name="destination" placeholder="París, Roma…" required>
-        </div>
-      </div>
-
-      <div class="grid cols-2" style="margin-top:16px">
-        <div>
-          <label for="departure_date">Fecha de salida</label>
-          <input class="input" type="date" id="departure_date" name="departure_date" required>
-        </div>
-        <div>
-          <label for="return_date">Fecha de regreso</label>
-          <input class="input" type="date" id="return_date" name="return_date" required>
+          <label for="destino">Destino</label>
+          <input class="input" id="destino" name="destino" placeholder="París, Roma…" required>
         </div>
       </div>
 
       <div class="grid cols-2" style="margin-top:16px">
         <div>
-          <label>Adultos</label>
+          <label for="ida">Fecha de ida</label>
+          <input class="input" type="date" id="ida" name="ida" required>
+        </div>
+        <div>
+          <label for="vuelta">Fecha de vuelta</label>
+          <input class="input" type="date" id="vuelta" name="vuelta" required>
+        </div>
+      </div>
+
+      <div class="grid cols-2" style="margin-top:16px">
+        <div>
+          <label for="adultos">Adultos</label>
           <div class="counter">
-            <button class="btn-icon" type="button" id="a-minus">−</button>
-            <span class="chip" id="adults-count">2</span>
-            <button class="btn-icon" type="button" id="a-plus">+</button>
+            <button class="btn-icon" type="button" id="adultos-menos">−</button>
+            <span class="chip" id="adultos-count">2</span>
+            <button class="btn-icon" type="button" id="adultos-mas">+</button>
           </div>
         </div>
         <div>
-          <label>Niños (0–12)</label>
+          <label for="niños">Niños (0–12)</label>
           <div class="counter">
-            <button class="btn-icon" type="button" id="c-minus">−</button>
-            <span class="chip" id="children-count">0</span>
-            <button class="btn-icon" type="button" id="c-plus">+</button>
+            <button class="btn-icon" type="button" id="niños-menos">−</button>
+            <span class="chip" id="niños-count">0</span>
+            <button class="btn-icon" type="button" id="niños-mas">+</button>
           </div>
         </div>
       </div>
 
       <div style="margin-top:16px">
-        <label for="activities">¿Qué te interesa?</label>
-        <textarea class="textarea" id="activities" name="activities" placeholder="Playas, museos, gastronomía, naturaleza, aventura, cultura…"></textarea>
+        <label for="actividades">¿Qué te interesa?</label>
+        <textarea class="textarea" id="actividades" name="actividades" placeholder="Playas, museos, gastronomía, naturaleza, aventura, cultura…"></textarea>
       </div>
 
       <div style="margin-top:16px">
@@ -355,36 +355,36 @@
 
     // Establecer fechas mínimas
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('departure_date').min = today;
-    document.getElementById('return_date').min = today;
+    document.getElementById('ida').min = today;
+    document.getElementById('vuelta').min = today;
 
-    // Actualizar fecha mínima de regreso cuando cambie la salida
-    document.getElementById('departure_date').addEventListener('change', function() {
-      document.getElementById('return_date').min = this.value;
+    // Actualizar fecha mínima de vuelta cuando cambie la ida
+    document.getElementById('ida').addEventListener('change', function() {
+      document.getElementById('vuelta').min = this.value;
     });
 
     // Función para cambiar contadores
     function changeCount(type, change) {
-      if (type === 'adults') {
+      if (type === 'adultos') {
         adults = Math.max(1, adults + change);
-        document.getElementById('adults-count').textContent = adults;
-        document.getElementById('a-minus').disabled = adults <= 1;
-      } else if (type === 'children') {
+        document.getElementById('adultos-count').textContent = adults;
+        document.getElementById('adultos-menos').disabled = adults <= 1;
+      } else if (type === 'niños') {
         children = Math.max(0, children + change);
-        document.getElementById('children-count').textContent = children;
-        document.getElementById('c-minus').disabled = children <= 0;
+        document.getElementById('niños-count').textContent = children;
+        document.getElementById('niños-menos').disabled = children <= 0;
       }
     }
 
     // Event listeners para contadores
-    document.getElementById('a-minus').addEventListener('click', () => changeCount('adults', -1));
-    document.getElementById('a-plus').addEventListener('click', () => changeCount('adults', 1));
-    document.getElementById('c-minus').addEventListener('click', () => changeCount('children', -1));
-    document.getElementById('c-plus').addEventListener('click', () => changeCount('children', 1));
+    document.getElementById('adultos-menos').addEventListener('click', () => changeCount('adultos', -1));
+    document.getElementById('adultos-mas').addEventListener('click', () => changeCount('adultos', 1));
+    document.getElementById('niños-menos').addEventListener('click', () => changeCount('niños', -1));
+    document.getElementById('niños-mas').addEventListener('click', () => changeCount('niños', 1));
 
     // Inicializar contadores
-    changeCount('adults', 0);
-    changeCount('children', 0);
+    changeCount('adultos', 0);
+    changeCount('niños', 0);
 
     // Función para mostrar/ocultar feedback
     function showFeedback(type) {
@@ -406,16 +406,16 @@
       
       // Preparar datos para el webhook
       const formData = {
-        origin: document.getElementById('origin').value,
-        destination: document.getElementById('destination').value,
-        departure_date: document.getElementById('departure_date').value,
-        return_date: document.getElementById('return_date').value,
-        adults: adults,
-        children: children,
-        total_travelers: adults + children,
-        activities: document.getElementById('activities').value,
+        origen: document.getElementById('origen').value,
+        destino: document.getElementById('destino').value,
+        ida: document.getElementById('ida').value,
+        vuelta: document.getElementById('vuelta').value,
+        adultos: adults,
+        niños: children,
+        total_viajeros: adults + children,
+        actividades: document.getElementById('actividades').value,
         email: document.getElementById('email').value,
-        family_type: `${adults} adulto${adults > 1 ? 's' : ''}, ${children} niño${children !== 1 ? 's' : ''}`
+        tipo_familia: `${adults} adulto${adults > 1 ? 's' : ''}, ${children} niño${children !== 1 ? 's' : ''}`
       };
       
       try {
@@ -434,10 +434,10 @@
           document.getElementById('travelForm').reset();
           adults = 2;
           children = 0;
-          document.getElementById('adults-count').textContent = adults;
-          document.getElementById('children-count').textContent = children;
-          changeCount('adults', 0);
-          changeCount('children', 0);
+          document.getElementById('adultos-count').textContent = adults;
+          document.getElementById('niños-count').textContent = children;
+          changeCount('adultos', 0);
+          changeCount('niños', 0);
         } else {
           throw new Error('Error en la respuesta del servidor');
         }
@@ -457,10 +457,10 @@
       const results = [];
       const assert = (cond, msg) => results.push((cond ? '✅' : '❌') + ' ' + msg);
 
-      assert(!!document.getElementById('departure_date'), 'Existe campo departure_date');
-      assert(!!document.getElementById('return_date'), 'Existe campo return_date');
-      assert(!!document.getElementById('adults-count'), 'Existe contador de adultos');
-      assert(!!document.getElementById('children-count'), 'Existe contador de niños');
+      assert(!!document.getElementById('ida'), 'Existe campo ida');
+      assert(!!document.getElementById('vuelta'), 'Existe campo vuelta');
+      assert(!!document.getElementById('adultos-count'), 'Existe contador de adultos');
+      assert(!!document.getElementById('niños-count'), 'Existe contador de niños');
       assert(getComputedStyle(document.body).fontFamily.toLowerCase().includes('helvetica'), 'Body usa Helvetica');
       assert(adults === 2, 'Adultos inicializado en 2');
       assert(children === 0, 'Niños inicializado en 0');
