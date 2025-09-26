@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condado CAPITAL - Planifica tu Viaje Familiar</title>
+    <title>TrueHorizon Travel - Planifica tu Viaje Familiar</title>
     <style>
         * {
             margin: 0;
@@ -13,40 +13,119 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: radial-gradient(ellipse at center, #0f1419 0%, #000814 50%, #000000 100%);
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto de estrellas de fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #00d4ff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(0, 212, 255, 0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, #00d4ff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(0, 212, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, #00d4ff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            z-index: -1;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
         }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: linear-gradient(145deg, rgba(15, 20, 25, 0.95) 0%, rgba(0, 8, 20, 0.98) 100%);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 212, 255, 0.1),
+                inset 0 1px 0 rgba(0, 212, 255, 0.2),
+                0 0 60px rgba(0, 212, 255, 0.05);
             overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .header {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 84, 166, 0.2) 100%);
             color: white;
             padding: 40px 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.05) 50%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .logo-container {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 60px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+            position: relative;
+        }
+        
+        .logo svg {
+            width: 100%;
+            height: 100%;
+            fill: #00d4ff;
         }
         
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #00d4ff;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+            position: relative;
+            z-index: 2;
         }
         
         .header p {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 2;
         }
         
         .form-container {
             padding: 40px 30px;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.0) 0%, rgba(0, 8, 20, 0.1) 100%);
         }
         
         .form-group {
@@ -62,27 +141,37 @@
         label {
             display: block;
             font-weight: 600;
-            color: #333;
+            color: #00d4ff;
             margin-bottom: 8px;
             font-size: 0.95rem;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
         
         input, select, textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e1e8ed;
+            border: 2px solid rgba(0, 212, 255, 0.2);
             border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: #fafbfc;
+            background: rgba(15, 20, 25, 0.6);
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
         
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #4ecdc4;
-            background: white;
+            border-color: #00d4ff;
+            background: rgba(15, 20, 25, 0.8);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+            box-shadow: 
+                0 5px 15px rgba(0, 212, 255, 0.3),
+                0 0 30px rgba(0, 212, 255, 0.1),
+                inset 0 1px 0 rgba(0, 212, 255, 0.2);
         }
         
         textarea {
@@ -91,18 +180,40 @@
         }
         
         .travelers-section {
-            background: #f8f9ff;
+            background: linear-gradient(145deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 84, 166, 0.1) 100%);
             padding: 25px;
             border-radius: 15px;
-            border: 2px dashed #4ecdc4;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .travelers-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.02) 50%, transparent 70%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
         
         .travelers-section h3 {
-            color: #333;
+            color: #00d4ff;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
         
         .counter-group {
@@ -110,6 +221,12 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .counter-group span {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .counter {
@@ -123,23 +240,30 @@
             height: 40px;
             border: none;
             border-radius: 50%;
-            background: #4ecdc4;
+            background: linear-gradient(145deg, #00d4ff, #0084a6);
             color: white;
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 15px rgba(0, 212, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
         .counter button:hover {
-            background: #45b7b8;
+            background: linear-gradient(145deg, #00b8e6, #006b8a);
             transform: scale(1.1);
+            box-shadow: 
+                0 6px 20px rgba(0, 212, 255, 0.4),
+                0 0 30px rgba(0, 212, 255, 0.2);
         }
         
         .counter button:disabled {
-            background: #ddd;
+            background: linear-gradient(145deg, rgba(100, 100, 100, 0.3), rgba(80, 80, 80, 0.3));
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
         
         .counter span {
@@ -147,10 +271,12 @@
             font-weight: bold;
             min-width: 30px;
             text-align: center;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
         
         .submit-btn {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(145deg, #00d4ff 0%, #0084a6 100%);
             color: white;
             padding: 20px 40px;
             border: none;
@@ -163,11 +289,33 @@
             margin-top: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 
+                0 10px 30px rgba(0, 212, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
         }
         
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 
+                0 15px 40px rgba(0, 212, 255, 0.4),
+                0 0 50px rgba(0, 212, 255, 0.2);
         }
         
         .submit-btn:disabled {
@@ -183,13 +331,18 @@
         }
         
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4ecdc4;
+            border: 4px solid rgba(0, 212, 255, 0.1);
+            border-top: 4px solid #00d4ff;
             border-radius: 50%;
             width: 50px;
             height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+        
+        .loading p {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         @keyframes spin {
@@ -199,22 +352,26 @@
         
         .success-message {
             display: none;
-            background: #d4edda;
-            color: #155724;
+            background: linear-gradient(145deg, rgba(0, 212, 255, 0.1), rgba(0, 84, 166, 0.2));
+            color: #00d4ff;
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
             text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         .error-message {
             display: none;
-            background: #f8d7da;
-            color: #721c24;
+            background: linear-gradient(145deg, rgba(255, 100, 100, 0.1), rgba(200, 50, 50, 0.2));
+            color: #ff6b6b;
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
             text-align: center;
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         @media (max-width: 600px) {
@@ -238,7 +395,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>✈️ TrueHorizon Travel</h1>
+            <div class="logo-container">
+                <div class="logo">
+                    <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ala izquierda -->
+                        <path d="M10 50 C10 30, 30 20, 50 25 L80 35 C85 37, 85 43, 80 45 L50 55 C30 60, 10 50, 10 50 Z" fill="currentColor"/>
+                        <path d="M15 45 C15 35, 25 30, 35 32 L55 38 C58 39, 58 41, 55 42 L35 48 C25 50, 15 45, 15 45 Z" fill="currentColor" opacity="0.7"/>
+                        <path d="M20 42 C20 37, 25 35, 30 36 L40 39 C42 40, 42 41, 40 42 L30 45 C25 46, 20 42, 20 42 Z" fill="currentColor" opacity="0.5"/>
+                        
+                        <!-- Texto OdinX -->
+                        <text x="110" y="70" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="bold" fill="currentColor">OdinX</text>
+                    </svg>
+                </div>
+            </div>
+            <h1>TrueHorizon Travel</h1>
             <p>Planifica tu aventura familiar perfecta</p>
         </div>
         
@@ -356,13 +526,15 @@
             // Mostrar loading
             document.getElementById('loading').style.display = 'block';
             
-            // Preparar datos
+            // Preparar datos - AQUÍ ESTÁ EL CAMBIO PRINCIPAL
             const formData = {
                 origin: document.getElementById('origin').value,
                 destination: document.getElementById('destination').value,
                 departure_date: document.getElementById('departure_date').value,
                 return_date: document.getElementById('return_date').value,
-                travelers: adults + children,
+                adults: adults,           // Campo separado para adultos
+                children: children,       // Campo separado para niños
+                total_travelers: adults + children,  // Total para referencia
                 activities: document.getElementById('activities').value,
                 email: document.getElementById('email').value,
                 family_type: `${adults} adulto${adults > 1 ? 's' : ''}, ${children} niño${children !== 1 ? 's' : ''}`
@@ -401,6 +573,4 @@
         changeCount('children', 0);
     </script>
 </body>
-
 </html>
-
